@@ -1,0 +1,9 @@
+{
+    "Sentence": ["Subject+Predicate"],
+    "Subject": ["Article+Noun", "he", "she", "it"],
+    "Predicate": ["Verb+Object"],
+    "Object": ["Article+Noun", "him", "her", "it"],
+    "Article": ["a", "the"],
+    "Noun": ["boy","ball", "rock", "samosa", "girl"],
+    "Verb": ["hit", "threw", "ate"]
+}

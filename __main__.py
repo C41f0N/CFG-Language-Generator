@@ -1,33 +1,43 @@
-prodRules = {
-    "Sentence": ["Subject+Predicate"],
-    "Subject": ["Article+Noun", "he", "she", "it"],
-    "Predicate": ["Verb+Object"],
-    "Object": ["Article+Noun", "him", "her", "it"],
-    "Article": ["a", "the"],
-    "Noun": ["boy","ball", "rock", "pumpkin", "girl"],
-    "Verb": ["hit", "threw", "ate"],
-}
+import json
+# prodRules = {
+#     "Sentence": ["Subject+Predicate"],
+#     "Subject": ["Article+Noun", "he", "she", "it"],
+#     "Predicate": ["Verb+Object"],
+#     "Object": ["Article+Noun", "him", "her", "it"],
+#     "Article": ["a", "the"],
+#     "Noun": ["boy","ball", "rock", "samosa", "girl"],
+#     "Verb": ["hit", "threw", "ate"],
+# }
 
-terminSym = [
-    "he",
-    "she",
-    "it",
-    "him",
-    "her",
-    "a",
-    "the",
-    "boy",
-    "ball",
-    "rock",
-    "pumpkin",
-    "girl",
-    "hit",
-    "threw",
-    "ate"
-]
+# terminSym = [
+#     "he",
+#     "she",
+#     "it",
+#     "him",
+#     "her",
+#     "a",
+#     "the",
+#     "boy",
+#     "ball",
+#     "rock",
+#     "pumpkin",
+#     "girl",
+#     "hit",
+#     "threw",
+#     "ate"
+# ]
+with open('prodRules.json', 'r') as file:
+    rulesData = json.load(file)
+
+prodRules = rulesData
+
+with open('terminals.json', 'r') as file:
+    data = json.load(file)
+
+terminSym = data["terminals"]   
 
 def evaluate(s : str, d: int, i: int):
-
+    
     if i > d:
         # print("[-] Depth reached!")
         return
@@ -43,7 +53,8 @@ def evaluate(s : str, d: int, i: int):
     if allTerminal:
         s = s.replace("+", " ")
         s = s[0].upper() + s[1:] + "."
-        print(s)
+        print("\nSentence complete")
+        print("   ", s, "\n")
         return
 
 
@@ -57,6 +68,7 @@ def evaluate(s : str, d: int, i: int):
 
             for evaluation in possibleEvaluations:
                 newS = s.replace(symbol, evaluation, 1)
+                
                 evaluate(newS, d, i + 1)
 
 
